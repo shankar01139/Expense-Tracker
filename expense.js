@@ -74,7 +74,7 @@
         expenseRowEl.appendChild(expenseTdDateEl);
 
         const expenseTdAmountEl = document.createElement('TD');
-        expenseTdAmountEl.textContent = '$' + expense.amount;
+        expenseTdAmountEl.textContent = '₹' + expense.amount;
         expenseRowEl.appendChild(expenseTdAmountEl);
 
         const expenseTdOptionsEl = document.createElement('TD');
