@@ -4,7 +4,8 @@
 }
 body{
     background:whitesmoke;
-    color:rgb(82, 16, 236);
+    color:rgb(216, 6, 23);
+    font-weight: bolder;
 }
 .title{
     width: 500px;
