@@ -29,3 +29,6 @@ function check(){
 function start(){
     window.open("login.html","_self");
 }
+function end(){
+    window.open("index.html","_self");
+}
