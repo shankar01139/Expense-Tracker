@@ -1,0 +1,79 @@
+*{
+    margin:0;
+    font-family: 'Titillium Web', sans-serif;
+}
+body{
+    background:whitesmoke;
+    color:rgb(82, 16, 236);
+}
+.title{
+    width: 500px;
+    color:rgb(218, 21, 21);
+    margin:3% auto;
+    margin-left: 40%;
+}
+.content{
+    width: 580px;
+    margin: 0 auto;
+    background-color:palevioletred;
+    padding: 3%;
+    padding-left: 6%;
+    
+}
+.whole-content{
+    border-radius: 5px;
+}
+.second-title{
+    text-align:left;
+    margin: 2% 0;
+    font-weight: 100;
+    color: black;
+    font-weight: bolder;
+}
+.form{
+    padding: 5px;
+}
+.form-line{
+    display: inline-flex;
+    padding: 5px 0px;
+}
+.left{
+    float: left;
+    color: blue;
+    font-weight: bolder;
+}
+.right{
+    float:right;
+    margin-right: 100px;
+    color: blue;
+    font-weight: bolder;
+}
+input, select{
+    width: 130px;
+    margin-left: 10px;
+    cursor: text;
+}
+table{
+    width: 100%;
+}
+thead{
+    background-color:rgb(245, 229, 229);
+    line-height: 30px;
+    color: rgb(5, 148, 48);
+}
+button{
+    width: 200px;
+    color:rgb(10, 2, 2); 
+    padding: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 20px;
+    background-color: rgb(220, 248, 61);
+    border-radius: 5px;
+    margin: 14px 25%;
+    cursor: pointer;
+}
+a{
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login Page</title>
+</head>
+<body style="background-color: beige;">
+    <div class="login">
+        <form name='form-login'>
+            <h1>Sign In</h1>
+            <label for="userName">Email</label>
+            <input type="email" id="userName" placeholder="Email ID" required>
+            <label for="userPw">Password</label>
+            <input type="password" id= "userPw" placeholder="Password" required>
+            <div id="remember">
+                <input type="checkbox" value="lsRememberMe" id="rememberMe"
+                       style="display: inline-block;">
+                <label>Remember me</label>
+            </div>
+            <input id= "login_btn" type="submit" value="Login" onclick="check()">
+        </form>
+        <span style="color: black;font-weight: bold;margin-left: 80px;" class="link">Don't have account?<a href="registration.html">Register.</a></span>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
+
