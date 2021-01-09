@@ -107,3 +107,6 @@
 
 
 })();
+function end(){
+    window.open("index.html","_self");
+}
