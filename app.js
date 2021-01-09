@@ -21,7 +21,7 @@ function check(){
     var userName = document.getElementById('userName');
     var userPw = document.getElementById('userPw');
     if(userName.value == storedName && userPw.value == storedPw){
-        window.open("expense.html");
+        window.open("expense.html","_self");
     }else{
         alert("Error occured while Logging In...!!");
     }
