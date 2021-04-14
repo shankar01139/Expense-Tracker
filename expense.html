@@ -5,65 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Expense Tracker</title>
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" 
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="expense.css">
+    <link rel="stylesheet" href="./expense.css">
 </head>
-<body>
-    <header>
-        <h1 class="title">Expense Tracker </h1>
-<!--         <button style="padding: 2px;background-color: aquamarine;font-weight: bolder;" onclick="end()">LOGOUT</button> -->
-        <input type="submit" value="LOGOUT"style="margin-left:350px;padding: 2px;background-color: aquamarine;font-weight: bolder;" onclick="end()">
-    <header>
-<div class="whole-content">
-    <section class="content">
-        <h3 class="second-title">Add a new item: </h3>
-        <div class="form">
-            <form id="exp-Form">
-                <div class="form-line left">
-                    <span for="type">Type:</span>
-                    <select id="type">
-                        <option value="chooseOne">Choose one...</option>
-                        <option value="Personal">Personal</option>
-                        <option value="Professional">Professional</option>
-                        <option value="Others">Other</option>
-                    </select>
+<body style="background-image:./img/background.jpg;">
+<h1>Expense Tracker</h1>
+
+        <form id="form">
+            <div id="form-row-1">
+                <div id="amount-div">
+                    Amount: <br />
+                     ₹<input
+                        id="amount"
+                        class="input"
+                        type="number"
+                        placeholder="₹₹₹"
+                        style="text-align: center"
+                        required
+                    />
+                    <p></p>
                 </div>
-                <div class="form-line right">
-                    <span for="name">Description:</span>
-                    <input type="text" id="name">
+                <div id="where-div">
+                    Reason: <br />
+                    <input
+                        id="place"
+                        class="input"
+                        type="text"
+                        placeholder="Reason?"
+                        style="text-align: center"
+                        required
+                    />
+                    <p></p>
                 </div>
-                <div class="form-line left">
-                    <span for="date">Date:</span>
-                    <input type="date" id="date">
+            </div>
+
+            <div id="form-row-2">
+                <div id="date-div">
+                    Date: <br />
+                    <input type="date" id="date" class="input" required />
+                    <p></p>
                 </div>
-                <div class="form-line right">
-                    <span for="amount">Amount:</span>
-                    <input type="text" id="amount">
+                <div id="type-buttons" style="text-align: left">
+                    Type: <br />
+
+                    <input checked id="radio-cash" type="radio" class="input" name="payment-type" value="Cash" />
+                    <label for="radio-cash">Cash</label> <br />
+                    <input id="radio-credit" type="radio" class="input" name="payment-type" value="Credit" />
+                    <label for="radio-credit">Credit Card </label><br />
+                    <input id="radio-debit" type="radio" class="input" name="payment-type" value="Debit" />
+                    <label for="radio-debit">Debit Card</label> <br />
+                    <input id="radio-crypto" type="radio" class="input" name="payment-type" value="Crypto" />
+                    <label for="radio-crypto">Crypto Coin</label> <br />
+                    <p></p>
                 </div>
-                <button type="submit" class="button-save">Add a new expense</button>
-            </form>
-        </div>
-    </section>
-    <section class="content">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Options</th>
-                </tr>
-            </thead>
-            <tbody id="expenseTable">
-                <tr>
-                    <td colspan="5">No expense items yet! Please add one up top...</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-</div>
-    <script src="expense.js"></script>
+            </div>
+
+            <div id="buttons">
+                <input class="input" id="submit" type="button" value="Add Expense" />
+                <input id="remove-all" type="button" value="Remove All Expenses" />
+                <input id="clear" type="button" value="Clear Form" />
+            </div>
+        </form>
+        <p></p>
+
+        <table id="table"></table>
+    <script src="./expense.js"></script>
 </body>
 </html>
+
