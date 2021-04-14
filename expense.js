@@ -1,112 +1,160 @@
-(function(){
+document.addEventListener("DOMContentLoaded", function () {
+    displayExpensesOnTable();
 
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-
-    document.getElementById('exp-Form').addEventListener('submit', function(e){
-
-        e.preventDefault();
-        let type = document.getElementById('type').value;
-        let name = document.getElementById('name').value;
-        let date = document.getElementById('date').value;
-        let amount = document.getElementById('amount').value;
-
-        if(type == 'chooseOne' || name.length <= 0 || date == '' ) {return;}
-
-        const expense = {
-            type, 
-            name, 
-            date,
-            amount, 
-            id: expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 1,
-        }
-
-        expenses.push(expense);
-       
-        localStorage.setItem('expenses', JSON.stringify(expenses));
-
-        document.getElementById('exp-Form').reset();
-        showExpenses();
-    });
-
-    function showExpenses(){
-
-        const expenseTable = document.getElementById('expenseTable');
-        expenseTable.innerHTML = '';
-
-        if(expenses.length > 0){
-            for(let i = 0; i < expenses.length; i++){
-
-                expenseTable.appendChild(createDataRow(expenses[i])); 
-                
-            } 
-        }  else {
-           
-            expenseTable.appendChild(createEmptyRow());           
-        }
+    const inputs = document.getElementsByClassName("input");
+    for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+        input.addEventListener("keypress", function (e) {
+            switch (e.key) {
+                case "Enter":
+                    addNewExpense();
+                default:
+                    break;
+            }
+        });
     }
+});
 
-    function createEmptyRow(){
-        const expenseRowEl = document.createElement('TR');       
+const removeAll = document.getElementById("remove-all");
+const submitButton = document.getElementById("submit");
+const clearButton = document.getElementById("clear");
+const table = document.getElementById("table");
 
-        const expenseTdTypeEl = document.createElement('TD');
-        expenseTdTypeEl.setAttribute('colspan', 5);
-        expenseTdTypeEl.textContent = 
-            'No expense items yet! Please add one up top...';
-        expenseRowEl.appendChild(expenseTdTypeEl);
+removeAll.addEventListener("click", function () {
+    document.getElementById("table").innerHTML = "";
 
-        return expenseRowEl;
-    }
+    window.localStorage.setItem("expenses", JSON.stringify([]));
 
-    function createDataRow(expense){
-        
-        const expenseRowEl = document.createElement('TR');
+    displayExpensesOnTable();
+});
 
-        const expenseTdTypeEl = document.createElement('TD');
-        expenseTdTypeEl.textContent = expense.type;
-        expenseRowEl.appendChild(expenseTdTypeEl);
+submitButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    addNewExpense();
+});
 
-        const expenseTdNameEl = document.createElement('TD');
-        expenseTdNameEl.textContent = expense.name;
-        expenseRowEl.appendChild(expenseTdNameEl);
+clearButton.addEventListener("click", function () {
+    document.getElementById("form").reset();
+});
 
-        const expenseTdDateEl = document.createElement('TD');
-        expenseTdDateEl.textContent = expense.date;
-        expenseRowEl.appendChild(expenseTdDateEl);
+table.addEventListener("click", function (e) {
+    const item = e.target;
 
-        const expenseTdAmountEl = document.createElement('TD');
-        expenseTdAmountEl.textContent = '₹' + expense.amount;
-        expenseRowEl.appendChild(expenseTdAmountEl);
+    let expenses = getSavedExpenses();
+    if (item.className === "delete") {
+        for (let i = 0; i < expenses.length; i++) {
+            const expense = expenses[i];
 
-        const expenseTdOptionsEl = document.createElement('TD');
-        const deleteAnchorEl = document.createElement('A');
-        deleteAnchorEl.className = "deleteButton";
-        deleteAnchorEl.onclick = function(e){
-            deleteExpense(expense.id);
-
-            localStorage.setItem('expenses', JSON.stringify(expenses));
-            showExpenses();
-        }
-
-        deleteAnchorEl.textContent = 'Delete';
-        expenseRowEl.appendChild(deleteAnchorEl);
-
-        return expenseRowEl;
-    }
-
-    function deleteExpense(id){
-        for(let i = 0; i < expenses.length; i++){
-            if(expenses[i].id == id){
+            if (expense.id == item.id) {
                 expenses.splice(i, 1);
             }
         }
-
-       
+        table.removeChild(item.parentNode.parentNode);
     }
 
-    showExpenses();
+    window.localStorage.setItem("expenses", JSON.stringify(expenses));
+});
 
+function addNewExpense() {
+    const newExpense = {
+        id: new Date().getTime() * Math.random(),
+        amount: parseFloat(document.getElementById("amount").value).toFixed(2),
+        place: document.getElementById("place").value,
+        type: "",
+        date: document.getElementById("date").value,
+    };
 
-})();
-function end(){
-    window.open("index.html","_self");
+    const paymentTypes = document.getElementsByName("payment-type");
+    for (let i = 0; i < paymentTypes.length; i++) {
+        if (paymentTypes[i].checked) {
+            newExpense.type = paymentTypes[i].value;
+        }
+    }
+
+    if ((newExpense.place === "" || newExpense.date === "") && isNaN(newExpense.amount) === true) {
+        alert("Please fill out all fields & amount must be a number");
+        return;
+    } else if (newExpense.place === "" || newExpense.date === "") {
+        alert("Please fill out all fields");
+        return;
+    } else if (isNaN(newExpense.amount) === true) {
+        alert("Amount must be a number");
+        return;
+    }
+
+    newExpense.amount = `$${newExpense.amount}`;
+
+    let expenses = getSavedExpenses();
+    expenses.push(newExpense);
+    document.getElementById("table").innerHTML = "";
+    window.localStorage.setItem("expenses", JSON.stringify(expenses));
+    displayExpensesOnTable();
 }
+
+function getSavedExpenses() {
+    return JSON.parse(window.localStorage.getItem("expenses")) || [];
+}
+
+function displayExpensesOnTable() {
+    const htmlTable = document.getElementById("table");
+
+    const thRow = createTableHeader();
+    htmlTable.appendChild(thRow);
+    document.getElementById("form").reset();
+
+    let expenses = getSavedExpenses();
+    for (let i = 0; i < expenses.length; i++) {
+        const expense = expenses[i];
+
+        if (expense !== null) {
+            tableRow = createDataRow(expense);
+            htmlTable.appendChild(tableRow);
+        }
+    }
+}
+
+function createTableHeader() {
+    const thRow = document.createElement("tr");
+    const typeTh = document.createElement("th");
+    const dateTh = document.createElement("th");
+    const amountTh = document.createElement("th");
+    const placeTh = document.createElement("th");
+    const removeTh = document.createElement("th");
+    typeTh.textContent = "Type";
+    dateTh.textContent = "Date";
+    amountTh.textContent = "Amount";
+    placeTh.textContent = "Place";
+    removeTh.textContent = "Remove";
+    thRow.appendChild(typeTh);
+    thRow.appendChild(dateTh);
+    thRow.appendChild(amountTh);
+    thRow.appendChild(placeTh);
+    thRow.appendChild(removeTh);
+    return thRow;
+}
+
+function createDataRow(expense) {
+    const tableRow = document.createElement("tr");
+    const typeTd = document.createElement("td");
+    const dateTd = document.createElement("td");
+    const amountTd = document.createElement("td");
+    const placeTd = document.createElement("td");
+    const removeTd = document.createElement("td");
+    const removeButton = document.createElement("button");
+    removeButton.id = expense.id;
+    removeButton.className = "delete";
+    removeButton.innerHTML = "X";
+    removeTd.appendChild(removeButton);
+    typeTd.textContent = expense.type;
+    dateTd.textContent = expense.date;
+    amountTd.textContent = expense.amount;
+    placeTd.textContent = expense.place;
+    tableRow.appendChild(typeTd);
+    tableRow.appendChild(dateTd);
+    tableRow.appendChild(amountTd);
+    tableRow.appendChild(placeTd);
+    tableRow.appendChild(removeTd);
+    return tableRow;
+}
+
+
