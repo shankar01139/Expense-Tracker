@@ -1,81 +1,115 @@
-*{
-    margin:0;
-    font-family: 'Titillium Web', sans-serif;
-}
-body{
-    background:whitesmoke;
-    color:rgb(240, 229, 230);
-    font-weight: bolder;
-}
-.title{
-    width: 500px;
-    color:rgb(218, 21, 21);
-    margin-top:3% auto;
-    margin-right:3% auto;
-    margin-left: 40%;
-}
-.content{
-    width: 580px;
+body {
+    text-align: center;
     margin: 0 auto;
-    background-color:palevioletred;
-    padding: 3%;
-    padding-left: 6%;
-    
+    background-color: black;
+    background-image: url(./img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: center/cover;
+    background-position: center;
+    color: whitesmoke;
+    font-family: monospace;
+    font-size: x-large;
 }
-.whole-content{
-    border-radius: 5px;
-}
-.second-title{
-    text-align:left;
-    margin: 2% 0;
-    font-weight: 100;
+
+table {
+    border: thin solid black;
+    border-collapse: collapse;
+    margin: auto;
+    width: 600px;
     color: black;
-    font-weight: bolder;
+    font-size: large;
+    padding: 10px;
 }
-.form{
-    padding: 5px;
-}
-.form-line{
-    display: inline-flex;
-    padding: 5px 0px;
-}
-.left{
-    float: left;
-    color: blue;
-    font-weight: bolder;
-}
-.right{
-    float:right;
-    margin-right: 100px;
-    color: blue;
-    font-weight: bolder;
-}
-input, select{
-    width: 130px;
-    margin-left: 10px;
-    cursor: text;
-}
-table{
-    width: 100%;
-}
-thead{
-    background-color:rgb(245, 229, 229);
-    line-height: 30px;
-    color: rgb(5, 148, 48);
-}
-button{
-    width: 200px;
-    color:rgb(10, 2, 2); 
+
+td,
+th {
+    border: thin solid black;
     padding: 10px;
     text-align: center;
-    font-size: 1.1em;
-    line-height: 20px;
-    background-color: rgb(220, 248, 61);
-    border-radius: 5px;
-    margin: 14px 25%;
+}
+
+th {
+    background-color: rgb(51, 37, 248);
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(160, 139, 253);
+}
+
+tr:nth-child(even) {
+    background-color: rgb(194, 181, 255);
+}
+
+form {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(194, 181, 255);
+    width: 600px;
+    color: black;
+    border-radius: 30px;
+    border: 3px solid #333;
+    font-size: large;
+    font-weight: bold;
+}
+
+#form-row-1 {
+    display: flex;
+    justify-content: center;
+}
+
+#form-row-2 {
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+    padding-bottom: 10px;
+}
+
+#date-div {
+    margin-right: 100px;
+    margin-top: 20px;
+}
+
+#where-div {
+    margin-left: 30px;
+}
+#amout {
+    width: 100px;
+}
+
+h1 {
+    background-color: rgb(51, 37, 248);
+    margin: 20px auto;
+    width: 400px;
+    border-radius: 30px;
+    border: 3px solid #333;
+    padding: 10px;
+    text-shadow: 2px 1px rgb(127, 98, 255);
+}
+
+.delete {
+    border-radius: 10px;
+    background-color: rgb(51, 37, 248);
+    color: whitesmoke;
+    border: none;
+    font-weight: bold;
     cursor: pointer;
 }
-a{
-    text-decoration: underline;
+
+.delete:hover {
+    border: solid red 1px;
+}
+
+.delete:active {
+    background-color: red;
+}
+
+.input,
+#remove-all,
+#clear,
+label {
     cursor: pointer;
 }
+
